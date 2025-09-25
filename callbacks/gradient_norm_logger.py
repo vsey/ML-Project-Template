@@ -20,6 +20,4 @@ class GradientNormLogger(Callback):
 
                 # if logger is tb_logger and log hist true log histogram of grad
                 if isinstance(trainer.logger, TensorBoardLogger) and self.log_hist:
-                    trainer.logger.experiment.add_histogram(
-                        f"grad_norm_{name}_hist", grad_norm
-                    )
+                    trainer.logger.experiment.add_histogram(f"grad_norm_{name}_hist", grad_norm)
