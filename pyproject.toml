@@ -21,3 +21,6 @@ dependencies = [
 dev = [
     "torchvista>=0.2.6",
 ]
+
+[tool.ruff]
+line-length = 100
