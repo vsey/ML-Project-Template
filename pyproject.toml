@@ -1,0 +1,22 @@
+[project]
+name = "lightning-hydra-zen-template"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "hydra-zen>=0.15.0",
+    "import-ipynb>=0.2",
+    "jaxtyping>=0.3.2",
+    "lightning>=2.5.5",
+    "matplotlib>=3.10.6",
+    "numpy>=2.3.3",
+    "pydantic>=2.11.9",
+    "tensorboardx>=2.6.4",
+    "torch>=2.8.0",
+    "torchaudio>=2.8.0",
+    "torchvision>=0.23.0",
+]
+
+[tool.setuptools]
+packages = ["datamodules", "models", "callbacks", "utils", "loggers", "datasets", "config"]
