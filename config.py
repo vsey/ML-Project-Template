@@ -1,9 +1,7 @@
 from datamodules.mnist import MNISTDM
-from hydra_zen import builds, make_config, instantiate, to_yaml, make_custom_builds_fn
+from hydra_zen import builds, make_config, instantiate, to_yaml
 from torchvision.transforms import Normalize, ToTensor, Compose
 import torch.optim as optim
-
-pbuilds = make_custom_builds_fn(zen_partial=True, populate_full_signature=True)
 
 
 data_conf = make_config(mean=(0.13,), std=(0.3,), shape=(1, 28, 28))
@@ -35,7 +33,9 @@ datamodule_conf = builds(
 #     # Set dataloader params
 #     batch_size: int = 64
 
-optimizer_conf = pbuilds(optim.AdamW, lr=0.3)
+optimizer_conf = builds(
+    optim.AdamW, lr=0.3, populate_full_signature=True, zen_partial=True
+)
 
 ExperimentConf = make_config(
     defaults=["_self_"],
