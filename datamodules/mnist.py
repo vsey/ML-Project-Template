@@ -11,32 +11,30 @@ from pydantic.types import PositiveInt
 class MNISTDM(LightningDataModule):
     def __init__(
         self,
-        root_path: Union[str, pathlib.Path] = "./datasets",
+        path: Union[str, pathlib.Path] = "./datasets/mnist",
         batch_size: PositiveInt = 32,
         num_workers: PositiveInt = 4,
         pin_memory: bool = True,
-        mean: tuple[float] = (0.1307,),
-        std: tuple[float] = (0.3079,),
-        shape: tuple[int, int, int] = (1, 28, 28),
         transforms: Optional[Any] = None,
     ):
         super().__init__()
         self.save_hyperparameters()
 
-        self.path = pathlib.Path(root_path) / str(self.__class__.__name__)
+
+        print(self.hparams)
 
     def prepare_data(self) -> None:
-        MNIST(root=self.path, train=True, download=True)
-        MNIST(root=self.path, train=False, download=True)
+        MNIST(root=self.hparams.path, train=True, download=True)
+        MNIST(root=self.hparams.path, train=False, download=True)
 
     def setup(self, stage: str = None):
         transforms = self.hparams.transforms
 
         self.train_ds = MNIST(
-            root=self.path, train=True, download=False, transform=transforms
+            root=self.hparams.path, train=True, download=False, transform=transforms
         )
         self.val_ds = MNIST(
-            root=self.path, train=False, download=False, transform=transforms
+            root=self.hparams.path, train=False, download=False, transform=transforms
         )
 
     def train_dataloader(self):
