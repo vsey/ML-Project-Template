@@ -20,7 +20,6 @@ class MNISTDM(LightningDataModule):
         super().__init__()
         self.save_hyperparameters()
 
-
         print(self.hparams)
 
     def prepare_data(self) -> None:
